@@ -1,4 +1,5 @@
 import React from "react";
+import ProductList from "~/app/ui/ProductList";
 
 type ShopPageProps = {
   params: {
@@ -53,8 +54,8 @@ const products = [
 
 function page({ params }: ShopPageProps) {
   console.log(params);
-  const category = params.slug[0];
-  const itemId = params.slug[1] ?? 0;
+  const category = params.slug?.[0] ?? null;
+  const itemId = params.slug?.[1] ?? 0;
 
   const renderProductsByCategory = (category: string, itemId: number) => {
     const filteredProducts = products.filter(
@@ -82,14 +83,18 @@ function page({ params }: ShopPageProps) {
       <h1 className="text-4xl font-semibold mb-6">
         Welcome to the Dante Shopping Mall
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-8">
-        <h2 className="text-2xl font-semibold mb-4">
-          {category.toUpperCase()}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-8 md:w-2/3">
-          {renderProductsByCategory(category, +itemId)}
+      {category ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            {category.toUpperCase()}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-8 md:w-2/3">
+            {renderProductsByCategory(category, +itemId)}
+          </div>
         </div>
-      </div>
+      ) : (
+        <ProductList products={products} />
+      )}
     </div>
   );
 }
