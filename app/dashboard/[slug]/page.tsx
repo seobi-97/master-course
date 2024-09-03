@@ -1,8 +1,12 @@
 type PageParams = {
-  slug: string
-}
+  slug: string;
+};
 
 export default function page({ params }: { params: PageParams }) {
-  console.log({ params })
-  return <div>{params.slug}</div>
+  console.log("params:", { params });
+  return (
+    <div>
+      <div>{params.slug}</div>
+    </div>
+  );
 }
