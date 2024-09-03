@@ -1,14 +1,15 @@
 import React from "react";
-import { getPosts } from "../lib/get-post";
+//import { getPosts } from "../lib/get-post";
+import { getPosts } from "../api/post/getPosts";
 
-const session = null;
+//const session = null;
 
 const Post = async () => {
   const posts = await getPosts();
 
-  if (session == null) {
-    throw new Error("no session provided");
-  }
+  // if (session == null) {
+  //   throw new Error("no session provided");
+  // }
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6">Posts</h1>
