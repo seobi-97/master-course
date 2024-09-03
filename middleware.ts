@@ -9,19 +9,39 @@ export function middleware(request: NextRequest) {
   // if (request.nextUrl.pathname.startsWith("/login")) {
   //   return NextResponse.redirect(new URL("/", request.url));
   // }
-  const newRequestHeaders = new Headers(request.headers);
-  newRequestHeaders.set("some-thing", "something from headers");
+  // const newRequestHeaders = new Headers(request.headers);
+  // newRequestHeaders.set("some-thing", "something from headers");
 
-  const response = NextResponse.next({
-    request: {
-      headers: newRequestHeaders,
-    },
-  });
+  // const response = NextResponse.next({
+  //   request: {
+  //     headers: newRequestHeaders,
+  //   },
+  // });
+  // response.cookies.set({
+  //   name: "hi",
+  //   value: "bye",
+  //   path: "/",
+  // });
+
+  let cookie = request.cookies.get("nextjs")?.value;
+  console.log(cookie);
+  const allCookies = request.cookies.getAll();
+  console.log(allCookies);
+
+  request.cookies.has("nextjs");
+  request.cookies.delete("nextjs");
+  request.cookies.has("nextjs");
+
+  const response = NextResponse.next();
+  response.cookies.set("vercel", "fast");
   response.cookies.set({
-    name: "hi",
-    value: "bye",
+    name: "vercel",
+    value: "fast",
     path: "/",
   });
+
+  cookie = response.cookies.get("vercel")?.path;
+  console.log(cookie);
   return response;
 }
 
