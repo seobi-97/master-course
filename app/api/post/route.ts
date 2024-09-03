@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 const posts = [
   {
@@ -36,6 +37,9 @@ const posts = [
   },
 ];
 export async function GET(request: NextRequest) {
+  const httpHeaders = headers();
+  console.info("httpHeaders: ", httpHeaders);
+  console.info("request.headers: ", request.headers);
   try {
     return new Promise((resolve) => {
       setTimeout(() => {
