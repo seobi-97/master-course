@@ -5,4 +5,5 @@ type Post = {
   author: string;
   date: string;
   comments: Array<{ id: number; text: string; author: string }>;
+  time: number;
 };

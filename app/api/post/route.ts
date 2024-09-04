@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 
+export const revalidate = 0;
 const posts = [
   {
     id: 1,
@@ -12,6 +13,7 @@ const posts = [
       { id: 1, text: "Great post!", author: "Jane Smith" },
       { id: 2, text: "I totally agree.", author: "Mike Johnson" },
     ],
+    time: new Date().getTime(),
   },
   {
     id: 2,
@@ -23,6 +25,7 @@ const posts = [
       { id: 1, text: "Thanks for sharing!", author: "John Doe" },
       { id: 2, text: "Looking forward to more.", author: "Mike Johnson" },
     ],
+    time: new Date().getTime(),
   },
   {
     id: 3,
@@ -34,12 +37,13 @@ const posts = [
       { id: 1, text: "Amazing content!", author: "Jane Smith" },
       { id: 2, text: "Keep up the good work.", author: "John Doe" },
     ],
+    time: new Date().getTime(),
   },
 ];
 export async function GET(request: NextRequest) {
   const httpHeaders = headers();
-  console.info("httpHeaders: ", httpHeaders);
-  console.info("request.headers: ", request.headers);
+  //console.info("httpHeaders: ", httpHeaders);
+  //console.info("request.headers: ", request.headers);
   try {
     return new Promise((resolve) => {
       setTimeout(() => {

@@ -27,21 +27,28 @@ export function middleware(request: NextRequest) {
   console.log(cookie);
   const allCookies = request.cookies.getAll();
   console.log(allCookies);
+  const newRequestHeaders = new Headers(request.headers);
+  newRequestHeaders.set("some-thing", "something from headers");
+  newRequestHeaders.set("request-time", new Date().getTime().toString());
 
-  request.cookies.has("nextjs");
-  request.cookies.delete("nextjs");
-  request.cookies.has("nextjs");
+  // request.cookies.has("nextjs");
+  // request.cookies.delete("nextjs");
+  // request.cookies.has("nextjs");
 
-  const response = NextResponse.next();
-  response.cookies.set("vercel", "fast");
-  response.cookies.set({
-    name: "vercel",
-    value: "fast",
-    path: "/",
+  const response = NextResponse.next({
+    request: {
+      headers: newRequestHeaders,
+    },
   });
+  // response.cookies.set("vercel", "fast");
+  // response.cookies.set({
+  //   name: "vercel",
+  //   value: "fast",
+  //   path: "/",
+  // });
 
-  cookie = response.cookies.get("vercel")?.path;
-  console.log(cookie);
+  // cookie = response.cookies.get("vercel")?.path;
+  // console.log(cookie);
   return response;
 }
 
